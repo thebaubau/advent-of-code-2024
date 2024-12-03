@@ -19,7 +19,7 @@ private:
 
 public:
 	DayOne() {
-		stream.open("pairs.txt");
+		stream.open("DayOne.txt");
 
 		while (stream >> word) {
 			int num{ stoi(word) };

@@ -130,10 +130,12 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="pairs.txt" />
+    <Text Include="DayOne.txt" />
+    <Text Include="DayTwo.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DayOne.h" />
+    <ClInclude Include="DayTwo.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

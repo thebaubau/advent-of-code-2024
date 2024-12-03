@@ -20,13 +20,19 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="pairs.txt">
+    <Text Include="DayOne.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="DayTwo.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DayOne.h">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DayTwo.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
