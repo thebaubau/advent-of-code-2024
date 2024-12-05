@@ -34,7 +34,6 @@ public:
 
 		std::sort(first.begin(), first.end());
 		std::sort(second.begin(), second.end());
-
 	};
 
 	void FirstPuzzle() {

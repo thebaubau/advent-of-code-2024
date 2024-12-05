@@ -12,12 +12,8 @@ private:
 	std::string line;
 	std::string num;
 	std::ifstream stream;
-	int count{ 0 };
-
-	enum Number {
-		INCREASING,
-		DECREASING
-	};
+	int countPuzzleOne{ 0 };
+	int countPuzzleTwo{ 0 };
 
 public:
 	DayTwo() {
@@ -27,18 +23,22 @@ public:
 			std::istringstream iss(line);
 			std::vector<int> data;
 
-			std::cout << line << std::endl;
-
 			while (getline(iss, num, ' ')) {
-				data.push_back(stoi(num));
+				int currentNum = stoi(num);
+				data.push_back(currentNum);
+			}
+
+			if (Safe(data)) {
+				countPuzzleOne++;
 			}
 
 			if (SafeTwo(data)) {
-				count++;
+				countPuzzleTwo++;
 			}
 		}
 
-		std::cout << count << std::endl;
+		std::cout << countPuzzleOne << std::endl;
+		std::cout << countPuzzleTwo << std::endl;
 	};
 
 	bool Safe(std::vector<int>& numbers) {
@@ -47,57 +47,36 @@ public:
 		for (int i{ 0 }; i < numbers.size() - 1; i++) {
 			int result = numbers[i] - numbers[i + 1];
 
-			if ((prevResult * result) < 0) {
-				std::cout << "Value fluctuated." << std::endl;
-				return false;
-			}
+			if (DifferenceInvalid(prevResult, result)) return false;
+			if (PairNotInRange(numbers[i], numbers[i + 1])) return false;
 
 			prevResult = result;
-
-			std::cout << result << " ";
-
-			result = abs(result);
-
-			if (result > 3 || result < 1) {
-				std::cout << "Value not in range." << std::endl;
-				return false;
-			}
 		}
-		std::cout << std::endl;
 		return true;
 	}
 
 	bool SafeTwo(std::vector<int>& numbers) {
-		int prevResult{ 0 };
+		std::vector<int> numbersCopy = numbers;
 
-		for (int i{ 0 }; i < numbers.size() - 1; i++) {
-			int result = numbers[i] - numbers[i + 1];
+		if (Safe(numbers)) return true;
 
-			if (differenceInvalid(prevResult, result)) {
+		for (int i{ 0 }; i < numbersCopy.size(); i++) {
+			std::vector<int> numbersCopy = numbers;
+			numbersCopy.erase(numbersCopy.begin() + i);
 
-				std::cout << "Value fluctuated." << std::endl;
-				return false;
-			}
-
-			prevResult = result;
-
-			if (isPairInvalid(numbers[i], numbers[i + 1])) {
-				std::cout << "Value not in range." << std::endl;
-				return false;
-			}
+			if (Safe(numbersCopy)) return true;
 		}
-		std::cout << std::endl;
-		return true;
+
+		return false;
 	}
 
-	bool isPairInvalid(int& numOne, int& numTwo) {
+	bool PairNotInRange(int& numOne, int& numTwo) {
 		int difference = abs(numOne - numTwo);
-		std::cout << difference << " ";
 
 		return (difference > 3 || difference < 1);
 	}
 
-	bool differenceInvalid(int& diffOne, int& diffTwo) {
+	bool DifferenceInvalid(int& diffOne, int& diffTwo) {
 		return (diffOne * diffTwo) < 0;
 	}
 };
