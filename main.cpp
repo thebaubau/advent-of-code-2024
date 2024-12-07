@@ -1,14 +1,17 @@
 
 #include "DayOne.h"
+#include "DayThree.h"
 #include "DayTwo.h"
 
 int main() {
-	DayOne dayOne;
+	//DayOne dayOne;
 
-	dayOne.FirstPuzzle();
-	dayOne.SecondPuzzle();
+	//dayOne.FirstPuzzle();
+	//dayOne.SecondPuzzle();
 
-	DayTwo dayTwo;
+	//DayTwo dayTwo;
+
+	DayThree dayThree;
 
 	return 0;
 }

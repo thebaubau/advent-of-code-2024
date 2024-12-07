@@ -26,12 +26,18 @@
     <Text Include="DayTwo.txt">
       <Filter>Resource Files</Filter>
     </Text>
+    <Text Include="DayThree.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DayOne.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="DayTwo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DayThree.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
