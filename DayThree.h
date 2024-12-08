@@ -13,13 +13,8 @@ private:
 	std::string content;
 
 	int mul(int x, int y) { return x * y; }
-
-	typedef int (*FnPtr)(int, int);
-
 public:
 	DayThree() {
-
-
 		stream.open("DayThree.txt");
 		std::stringstream ss;
 
@@ -29,12 +24,9 @@ public:
 		content = ss.str();
 
 		std::regex pattern(R"(mul\((\d+),(\d+)\))");
-		std::regex dos(R"(do\(\))");
-		std::regex donts(R"(don\'t\(\))");
-
 
 		PuzzleOne(pattern);
-		PuzzleTwo(pattern, dos, donts);
+		PuzzleTwo();
 	}
 
 	void PuzzleOne(std::regex& pattern) {
@@ -51,38 +43,28 @@ public:
 		std::cout << total << std::endl;
 	}
 
-	void PuzzleTwo(std::regex& pattern, std::regex& dos, std::regex& donts) {
+	void PuzzleTwo() {
 		int total{ 0 };
 		bool skip{ false };
-		std::string::const_iterator searchStart(content.cbegin());
-		std::vector<std::smatch> matches;
-		std::smatch match;
+		std::regex patterns(R"((do\(\))|(don't\(\))|mul\((\d+),(\d+)\))");
 
-		while (std::regex_search(searchStart, content.cend(), match, pattern)) {
-			matches.emplace_back(match);
-			searchStart = match.suffix().first;
+		auto begin = std::sregex_iterator(content.begin(), content.end(), patterns);
+		auto end = std::sregex_iterator();
+
+		for (auto it = begin; it != end; ++it) {
+			std::smatch match = *it;
+			std::string matchedString = match.str();
+
+			if (std::regex_match(matchedString, std::regex(R"(mul\((\d+),(\d+)\))")) && !skip)
+				total += mul(stoi(match[3]), stoi(match[4]));
+
+			else if (std::regex_match(matchedString, std::regex(R"(don\'t\(\))")))	skip = true;
+
+			else if (std::regex_match(matchedString, std::regex(R"(do\(\))"))) skip = false;
 		}
-
-		searchStart = content.cbegin();
-		while (std::regex_search(searchStart, content.cend(), match, donts)) {
-			matches.emplace_back(match);
-			searchStart = match.suffix().first;
-		}
-
-		searchStart = content.cbegin();
-		while (std::regex_search(searchStart, content.cend(), match, dos)) {
-			matches.emplace_back(match);
-			searchStart = match.suffix().first;
-		}
-
-		auto firstMatch = *std::min_element(matches.begin(), matches.end(),
-			[](const auto& a, const auto& b) {
-			return a.position() < b.position();
-		});
 
 		std::cout << total << std::endl;
 	}
-
 
 	~DayThree() = default;
 };
