@@ -1,4 +1,5 @@
 
+#include "DayFour.h"
 #include "DayOne.h"
 #include "DayThree.h"
 #include "DayTwo.h"
@@ -11,7 +12,9 @@ int main() {
 
 	//DayTwo dayTwo;
 
-	DayThree dayThree;
+	//DayThree dayThree;
+
+	DayFour dayFour;
 
 	return 0;
 }

@@ -130,11 +130,13 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="DayFour.txt" />
     <Text Include="DayOne.txt" />
     <Text Include="DayTwo.txt" />
     <Text Include="DayThree.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DayFour.h" />
     <ClInclude Include="DayOne.h" />
     <ClInclude Include="DayThree.h" />
     <ClInclude Include="DayTwo.h" />

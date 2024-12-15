@@ -29,6 +29,9 @@
     <Text Include="DayThree.txt">
       <Filter>Resource Files</Filter>
     </Text>
+    <Text Include="DayFour.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DayOne.h">
@@ -38,6 +41,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="DayThree.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DayFour.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
