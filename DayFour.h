@@ -2,18 +2,25 @@
 
 #include <fstream>
 #include <iostream>
+#include <regex>
 #include <sstream>
 #include <vector>
+
 
 class DayFour {
 private:
 	std::ifstream stream;
+	std::string content;
+
 	std::string line;
 	std::vector<std::string> grid;
 
 	std::string xmas{ "XMAS" };
 	std::string samx{ "SAMX" };
 	int count{ 0 };
+
+	int countSecond{ 0 };
+
 
 public:
 	DayFour() {
@@ -37,6 +44,33 @@ public:
 		count += CountXmas("DayFourColsAsRows.txt", samx);
 
 		std::cout << count << std::endl;
+
+		std::stringstream ss;
+
+		ss << stream.rdbuf();
+		stream.close();
+
+		content = ss.str();
+
+		std::regex patternXMAS(R"(M\.S\n\.A\.\nM\.S)");
+		std::regex patternSAMX(R"(S\.S\n\.A\.\nM\.M)");
+
+		std::string::const_iterator searchStart(content.cbegin());
+		//std::smatch match;
+
+		// Use regex to find all matches
+		auto matches_begin = std::sregex_iterator(content.begin(), content.end(), patternXMAS);
+		auto matches_end = std::sregex_iterator();
+
+		// Iterate over all matches
+		for (auto it = matches_begin; it != matches_end; ++it) {
+			std::smatch match = *it;
+			size_t pos = match.position();
+
+			// Output match and its position
+			std::cout << "Match found at position: " << pos << std::endl;
+			std::cout << "Matched region:\n" << match.str() << std::endl;
+		}
 	};
 
 	~DayFour() = default;
